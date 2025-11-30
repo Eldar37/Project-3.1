@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Дашборд</h1>
+<div class="grid">
+    <div class="card">
+        <h3>Сотрудники</h3>
+        <p class="metric">{{ employees }}</p>
+    </div>
+    <div class="card">
+        <h3>Должности</h3>
+        <p class="metric">{{ positions }}</p>
+    </div>
+    <div class="card">
+        <h3>Выплаты</h3>
+        <p class="metric">{{ payrolls }}</p>
+    </div>
+</div>
+<div class="card">
+    <h3>Недавние выплаты</h3>
+    {% if recent_payrolls %}
+    <table>
+        <thead>
+            <tr><th>Сотрудник</th><th>Период</th><th>Сумма</th><th>Дата</th></tr>
+        </thead>
+        <tbody>
+            {% for payroll in recent_payrolls %}
+            <tr>
+                <td>{{ payroll.employee }}</td>
+                <td>{{ payroll.period_start }} — {{ payroll.period_end }}</td>
+                <td>{{ payroll.total_pay }}</td>
+                <td>{{ payroll.paid_on }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Еще нет выплат.</p>
+    {% endif %}
+</div>
+{% endblock %}

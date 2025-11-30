@@ -1,0 +1,116 @@
+body {
+    font-family: "Segoe UI", sans-serif;
+    margin: 0;
+    background: #f4f4f8;
+    color: #1f2430;
+}
+
+a { color: #1b6ac9; text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0f172a;
+    color: #fff;
+    padding: 12px 18px;
+}
+
+.topbar nav a {
+    margin-left: 12px;
+    color: #e2e8f0;
+}
+
+.brand { font-weight: 700; letter-spacing: 1px; }
+
+.container {
+    max-width: 960px;
+    margin: 24px auto;
+    padding: 0 16px;
+}
+
+.card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 18px;
+    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.metric {
+    font-size: 28px;
+    font-weight: 700;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+table th, table td {
+    padding: 10px;
+    border-bottom: 1px solid #e2e8f0;
+    text-align: left;
+}
+
+.actions a {
+    margin-right: 8px;
+}
+
+form button, .button {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: none;
+    background: #1b6ac9;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.button-secondary {
+    padding: 8px 12px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+    color: #1f2937;
+    background: #fff;
+}
+
+form p {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+input, select, textarea {
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #cbd5e1;
+}
+
+.alert {
+    background: #ecfeff;
+    border: 1px solid #67e8f9;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.narrow {
+    max-width: 400px;
+    margin: 0 auto;
+}

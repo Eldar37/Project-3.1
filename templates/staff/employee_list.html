@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Сотрудники</h2>
+        <a class="button" href="{% url 'employee_add' %}">Добавить</a>
+    </div>
+    {% if object_list %}
+    <table>
+        <thead>
+            <tr><th>ФИО</th><th>Почта</th><th>Должность</th><th>График</th><th>Зарплата</th><th></th></tr>
+        </thead>
+        <tbody>
+            {% for employee in object_list %}
+            <tr>
+                <td>{{ employee }}</td>
+                <td>{{ employee.email }}</td>
+                <td>{{ employee.position.name }}</td>
+                <td>{{ employee.schedule.name }}</td>
+                <td>{{ employee.salary }}</td>
+                <td class="actions">
+                    <a href="{% url 'employee_edit' employee.pk %}">Изменить</a>
+                    <a href="{% url 'employee_delete' employee.pk %}">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Записей пока нет.</p>
+    {% endif %}
+</div>
+{% endblock %}

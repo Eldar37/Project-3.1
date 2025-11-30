@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+    <div class="card-header">
+        <h2>Выплаты</h2>
+        <a class="button" href="{% url 'payroll_add' %}">Добавить</a>
+    </div>
+    {% if object_list %}
+    <table>
+        <thead>
+            <tr><th>Сотрудник</th><th>Период</th><th>Сумма</th><th>Дата</th><th></th></tr>
+        </thead>
+        <tbody>
+            {% for payroll in object_list %}
+            <tr>
+                <td>{{ payroll.employee }}</td>
+                <td>{{ payroll.period_start }} — {{ payroll.period_end }}</td>
+                <td>{{ payroll.total_pay }}</td>
+                <td>{{ payroll.paid_on }}</td>
+                <td class="actions">
+                    <a href="{% url 'payroll_pdf' payroll.pk %}">PDF</a>
+                    <a href="{% url 'payroll_delete' payroll.pk %}">Удалить</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Записей пока нет.</p>
+    {% endif %}
+</div>
+{% endblock %}
