@@ -8,7 +8,7 @@
     {% if object_list %}
     <table>
         <thead>
-            <tr><th>Название</th><th>Базовая зарплата</th><th></th></tr>
+            <tr><th>Название</th><th>Базовый оклад</th><th></th></tr>
         </thead>
         <tbody>
             {% for position in object_list %}
@@ -16,7 +16,7 @@
                 <td>{{ position.name }}</td>
                 <td>{{ position.base_salary }}</td>
                 <td class="actions">
-                    <a href="{% url 'position_edit' position.pk %}">Изменить</a>
+                    <a href="{% url 'position_edit' position.pk %}">Редактировать</a>
                     <a href="{% url 'position_delete' position.pk %}">Удалить</a>
                 </td>
             </tr>
@@ -24,7 +24,7 @@
         </tbody>
     </table>
     {% else %}
-    <p>Записей пока нет.</p>
+    <p>Пока нет должностей.</p>
     {% endif %}
 </div>
 {% endblock %}

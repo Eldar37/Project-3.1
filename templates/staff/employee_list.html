@@ -8,7 +8,7 @@
     {% if object_list %}
     <table>
         <thead>
-            <tr><th>ФИО</th><th>Почта</th><th>Должность</th><th>График</th><th>Зарплата</th><th></th></tr>
+            <tr><th>Сотрудник</th><th>Email</th><th>Должность</th><th>График</th><th>Оклад</th><th></th></tr>
         </thead>
         <tbody>
             {% for employee in object_list %}
@@ -19,7 +19,7 @@
                 <td>{{ employee.schedule.name }}</td>
                 <td>{{ employee.salary }}</td>
                 <td class="actions">
-                    <a href="{% url 'employee_edit' employee.pk %}">Изменить</a>
+                    <a href="{% url 'employee_edit' employee.pk %}">Редактировать</a>
                     <a href="{% url 'employee_delete' employee.pk %}">Удалить</a>
                 </td>
             </tr>

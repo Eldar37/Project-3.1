@@ -8,7 +8,7 @@
     {% if object_list %}
     <table>
         <thead>
-            <tr><th>Сотрудник</th><th>Период</th><th>Сумма</th><th>Дата</th><th></th></tr>
+            <tr><th>Сотрудник</th><th>Период</th><th>Сумма</th><th>Дата выплаты</th><th></th></tr>
         </thead>
         <tbody>
             {% for payroll in object_list %}
@@ -26,7 +26,7 @@
         </tbody>
     </table>
     {% else %}
-    <p>Записей пока нет.</p>
+    <p>Пока нет выплат.</p>
     {% endif %}
 </div>
 {% endblock %}
