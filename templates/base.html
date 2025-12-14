@@ -3,7 +3,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Учет сотрудников</title>
+    <title>HRMS — управление персоналом</title>
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
 <body>
@@ -11,12 +11,15 @@
         <div class="brand">HRMS</div>
         <nav>
             {% if user.is_authenticated %}
-            <a href="{% url 'dashboard' %}">Дашборд</a>
+            <a href="{% url 'dashboard' %}">Главная</a>
             <a href="{% url 'employees' %}">Сотрудники</a>
             <a href="{% url 'positions' %}">Должности</a>
             <a href="{% url 'schedules' %}">Графики</a>
             <a href="{% url 'payrolls' %}">Выплаты</a>
-            <a href="{% url 'logout' %}">Выход</a>
+            {% if user.is_staff %}
+            <a href="{% url 'admin:index' %}">Админка</a>
+            {% endif %}
+            <a href="{% url 'logout' %}">Выйти</a>
             {% else %}
             <a href="{% url 'login' %}">Войти</a>
             {% endif %}
