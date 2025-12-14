@@ -1,8 +1,9 @@
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from reportlab.lib.pagesizes import A4
@@ -37,6 +38,15 @@ def dashboard(request):
         "recent_payrolls": recent_payrolls,
     }
     return render(request, "staff/dashboard.html", context)
+
+
+@login_required
+def logout_view(request):
+    """Allow GET logout to avoid 405 when following a link."""
+    logout(request)
+    messages.info(request, "Вы вышли из системы.")
+    return redirect("login")
+
 
 class PositionList(LoginRequiredMixin, ListView):
     model = Position
