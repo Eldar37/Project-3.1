@@ -1,10 +1,8 @@
-from datetime import datetime
-
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, UpdateView
 from reportlab.lib.pagesizes import A4
@@ -22,7 +20,7 @@ class TitleMixin:
         if self.title:
             context["title"] = self.title
         elif hasattr(self, "model"):
-            context["title"] = str(getattr(self.model._meta, "verbose_name", "Запись")).capitalize()
+            context["title"] = str(getattr(self.model._meta, "verbose_name", "запись")).capitalize()
         return context
 
 
@@ -39,7 +37,6 @@ def dashboard(request):
         "recent_payrolls": recent_payrolls,
     }
     return render(request, "staff/dashboard.html", context)
-
 
 class PositionList(LoginRequiredMixin, ListView):
     model = Position
@@ -130,8 +127,7 @@ class PayrollCreate(TitleMixin, LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         response = super().form_valid(form)
-        payroll: Payroll = self.object
-        messages.success(self.request, "Выплата создана.")
+        messages.success(self.request, "Выплата сохранена.")
         return response
 
 
@@ -146,13 +142,13 @@ def payroll_pdf(request, pk: int):
     payroll = get_object_or_404(Payroll.objects.select_related("employee"), pk=pk)
     response = HttpResponse(content_type="application/pdf")
     filename = f"payslip_{payroll.employee.last_name}_{payroll.period_end}.pdf"
-    response["Content-Disposition"] = f'attachment; filename="{filename}"'
+    response["Content-Disposition"] = f'attachment; filename=\"{filename}\"'
 
     pdf = canvas.Canvas(response, pagesize=A4)
     width, height = A4
     y = height - 50
     pdf.setFont("Helvetica-Bold", 16)
-    pdf.drawString(50, y, "Расчетный лист")
+    pdf.drawString(50, y, "Расчётный лист")
     pdf.setFont("Helvetica", 12)
     y -= 30
     pdf.drawString(50, y, f"Сотрудник: {payroll.employee}")
@@ -163,15 +159,15 @@ def payroll_pdf(request, pk: int):
     y -= 20
     pdf.drawString(50, y, f"Период: {payroll.period_start} - {payroll.period_end}")
     y -= 20
-    pdf.drawString(50, y, f"Зарплата: {payroll.employee.salary}")
+    pdf.drawString(50, y, f"Оклад: {payroll.employee.salary}")
     y -= 20
-    pdf.drawString(50, y, f"Основная часть: {payroll.gross_pay}")
+    pdf.drawString(50, y, f"Начисления: {payroll.gross_pay}")
     y -= 20
     pdf.drawString(50, y, f"Бонус: {payroll.bonus}")
     y -= 20
     pdf.drawString(50, y, f"Итого к выплате: {payroll.total_pay}")
     y -= 20
-    pdf.drawString(50, y, f"Дата выплаты: {payroll.paid_on}")
+    pdf.drawString(50, y, f"Выплачено: {payroll.paid_on}")
     if payroll.notes:
         y -= 30
         pdf.drawString(50, y, f"Комментарий: {payroll.notes}")
